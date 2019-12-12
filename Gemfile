@@ -5,8 +5,6 @@ ruby '2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -25,20 +23,35 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'dotenv-rails'
+gem 'rspec-rails', '~> 3.8'
+gem 'mysql2', '0.5.2'
+gem 'jquery-rails'
+gem 'kaminari'
+gem 'ransack', '2.1.1'
+gem 'jquery-ui-rails'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'database_cleaner'
+gem 'factory_bot_rails', '4.8.2'
+gem 'slim-rails'
+gem 'popper_js', '~> 1.11', '>= 1.11.1'
+gem 'devise'
+gem 'active_storage_validations'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers', ref: 'c0960bd72dd41c4e9bd8b4375254f539776bfe95'
 end
 
 group :development do

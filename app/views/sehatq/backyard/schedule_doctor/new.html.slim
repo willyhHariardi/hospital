@@ -1,0 +1,39 @@
+= render 'sehatq/backyard/shared/header'
+
+.ks-page-container.ks-dashboard-tabbed-sidebar-fixed-tabs
+  .ks-column.ks-page
+    .ks-page-header
+      section.ks-title-and-subtitle
+        .ks-title-block
+          .ks-sub-title Schedule Doctor
+          h3.ks-main-title Add Schedule
+    .ks-page-content
+      .ks-page-content-body
+        .ks-nav-body-wrapper
+          .container-fluid
+            .row
+              .col-lg-4.offset-4
+                 = form_for @schedule , as: :schedule_doctor, url: sehatq_backyard_schedule_doctor_index_path, method: :post do |f|
+                  .form-group.row
+                    .col-lg-12
+                      = f.label :doctor_id, 'Doctor'
+                      = f.select :doctor_id, @doctors.map{|u| [ u.name , u.id]}, {prompt: "Select a doctor"}, class: "form-control #{@schedule.errors[:doctor].any? ? 'error' : ''}"
+                      small.is-message.text-danger = flash_error?(@schedule, :doctor) || ''
+                  .form-group.row
+                    .col-lg-12
+                      = f.label :schedule, 'Schedule'
+                      = f.date_field :schedule, class: "form-control #{@schedule.errors[:schedule].any? ? 'error' : ''}"
+                      small.is-message.text-danger = flash_error?(@schedule, :schedule) || ''
+                  .form-group.row
+                    .col-lg-12
+                      = f.label :start_time, 'Start time'
+                      = f.time_field :start_time, class: "form-control #{@schedule.errors[:start_time].any? ? 'error' : ''}"
+                      small.is-message.text-danger = flash_error?(@schedule, :start_time) || ''
+                  .form-group.row
+                    .col-lg-12
+                      = f.label :end_time, 'End time'
+                      = f.time_field :end_time, class: "form-control #{@schedule.errors[:end_time].any? ? 'error' : ''}"
+                      small.is-message.text-danger = flash_error?(@schedule, :end_time) || ''
+                  .form-group.row
+                    .col-lg-12.text-right
+                       = f.submit 'Add', class: "btn btn-primary"

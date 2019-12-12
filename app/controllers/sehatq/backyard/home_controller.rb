@@ -1,4 +1,4 @@
-module Admin
+module Sehatq
   module Backyard
     class HomeController < ApplicationController
       before_action :authenticate_admin!

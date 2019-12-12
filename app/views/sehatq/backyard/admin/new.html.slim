@@ -1,0 +1,35 @@
+= render 'sehatq/backyard/shared/header'
+
+.ks-page-container.ks-dashboard-tabbed-sidebar-fixed-tabs
+  .ks-column.ks-page
+    .ks-page-header
+      section.ks-title-and-subtitle
+        .ks-title-block
+          .ks-sub-title Admin Management
+          h3.ks-main-title Add Admin
+    .ks-page-content
+      .ks-page-content-body
+        .ks-nav-body-wrapper
+          .container-fluid
+            .row
+              .col-lg-4.offset-4
+                div
+                  = form_for @admin_user, as: :admin_user, url: sehatq_backyard_admin_index_path, method: :post do |f|
+                    .form-group.row
+                      .col-lg-12
+                        = f.label :name, 'Name'
+                        = f.text_field :name, class: 'form-control'
+                        span.is-message = flash_error?(@admin_member, :name) || ''
+                    .form-group.row
+                      .col-lg-12
+                        = f.label :email, 'Email'
+                        = f.text_field :email, class: 'form-control'
+                        span.is-message = flash_error?(@admin_member, :email) || ''
+                    .form-group.row
+                      .col-lg-12
+                        = f.label :password, 'Password'
+                        = f.password_field :password, class: 'form-control'
+                        span.is-message = flash_error?(@admin_member, :password) || ''
+                    .form-group.row
+                      .col-lg-12.text-right
+                        = f.submit 'Add', class: "btn btn-primary"

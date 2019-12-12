@@ -1,0 +1,45 @@
+= render 'sehatq/backyard/shared/header'
+
+.ks-page-container.ks-dashboard-tabbed-sidebar-fixed-tabs
+  .ks-column.ks-page
+    .ks-page-header
+      section.ks-title-and-subtitle
+        .ks-title-block
+          h3.ks-main-title Admin Management
+    .ks-page-content
+      .ks-page-content-body.ks-filemanager-page
+        .ks-files
+          .ks-header
+            .ks-search.input-icon.icon-right.icon.icon-lg
+              = search_form_for ransack_instance, url: sehatq_backyard_hospital_index_path do |f|
+                = f.text_field :name_cont,
+                              placeholder: "Search",
+                              class: 'form-control', id: 'eg-search'
+                span.icon-addon
+                  span.la.la-search
+            .ks-filters
+              = button_to new_sehatq_backyard_hospital_path,
+                      class: 'btn-primary btn',
+                      method: :get do
+                | Add Hospital
+          .ks-content
+            table.table.table-bordered
+              thead
+                tr
+                  th width="150"  ID
+                  th Name
+                  th Adress
+              tbody
+                - @hospitals.each do |hospital|
+                  tr
+                    td
+                      = hospital.id
+                    td
+                      = hospital.name
+                    td 
+                      = hospital.address
+                - if @hospitals.empty?
+                  td colspan="5" style="text-align: center;"
+                    | Hospital can't be found, Please click "Add Hospital" to get a new hospital
+                
+            = paginate @hospitals

@@ -1,0 +1,45 @@
+= render 'sehatq/backyard/shared/header'
+
+.ks-page-container.ks-dashboard-tabbed-sidebar-fixed-tabs
+  .ks-column.ks-page
+    .ks-page-header
+      section.ks-title-and-subtitle
+        .ks-title-block
+          h3.ks-main-title Doctor Management
+    .ks-page-content
+      .ks-page-content-body.ks-filemanager-page
+        .ks-files
+          .ks-header
+            .ks-search.input-icon.icon-right.icon.icon-lg
+              = search_form_for ransack_instance, url: sehatq_backyard_doctor_index_path do |f|
+                = f.text_field :name_cont,
+                              placeholder: "Search",
+                              class: 'form-control', id: 'eg-search'
+                span.icon-addon
+                  span.la.la-search
+            .ks-filters
+              = button_to new_sehatq_backyard_doctor_path,
+                      class: 'btn-primary btn',
+                      method: :get do
+                | Add Doctor
+          .ks-content
+            table.table.table-bordered
+              thead
+                tr
+                  th width="150"  ID
+                  th Name
+                  th Email
+              tbody
+                - @doctors.each do |doctor|
+                  tr
+                    td
+                      = doctor.id
+                    td
+                      = doctor.name
+                    td 
+                      = doctor.hospital.name
+                - if @doctors.empty?
+                  td colspan="5" style="text-align: center;"
+                    | Doctors can't be found, Please click "Add Doctor" to get a new Doctor
+                
+            = paginate @doctors

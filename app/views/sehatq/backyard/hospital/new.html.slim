@@ -1,0 +1,30 @@
+= render 'sehatq/backyard/shared/header'
+
+.ks-page-container.ks-dashboard-tabbed-sidebar-fixed-tabs
+  .ks-column.ks-page
+    .ks-page-header
+      section.ks-title-and-subtitle
+        .ks-title-block
+          .ks-sub-title Hospital Management
+          h3.ks-main-title Add Hospital
+    .ks-page-content
+      .ks-page-content-body
+        .ks-nav-body-wrapper
+          .container-fluid
+            .row
+              .col-lg-4.offset-4
+                div
+                  = form_for @hospital, as: :hospital, url: sehatq_backyard_hospital_index_path, method: :post do |f|
+                    .form-group.row
+                      .col-lg-12
+                        = f.label :name, 'Name'
+                        = f.text_field :name, class: "form-control #{@hospital.errors[:name].any? ? 'error' : ''}"
+                        span.is-message = flash_error?(@hospital, :name) || ''
+                    .form-group.row
+                        .col-lg-12
+                          = f.label :address, 'Address'
+                          = f.text_area :address, class: "form-control #{@hospital.errors[:address].any? ? 'error' : ''}"
+                          small.is-message.text-danger = flash_error?(@hospital, :address) || ''
+                    .form-group.row
+                      .col-lg-12.text-right
+                        = f.submit 'Add', class: "btn btn-primary"

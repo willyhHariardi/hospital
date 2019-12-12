@@ -1,0 +1,29 @@
+= render 'sehatq/backyard/shared/header'
+
+.ks-page-container.ks-dashboard-tabbed-sidebar-fixed-tabs
+  .ks-column.ks-page
+    .ks-page-header
+      section.ks-title-and-subtitle
+        .ks-title-block
+          .ks-sub-title Store doctor
+          h3.ks-main-title Add Doctor
+    .ks-page-content
+      .ks-page-content-body
+        .ks-nav-body-wrapper
+          .container-fluid
+            .row
+              .col-lg-4.offset-4
+                 = form_for @doctor , as: :doctor, url: sehatq_backyard_doctor_index_path, method: :post do |f|
+                  .form-group.row
+                    .col-lg-12
+                      = f.label :name, 'Name'
+                      = f.text_field :name, class: "form-control #{@doctor.errors[:name].any? ? 'error' : ''}"
+                      small.is-message.text-danger = flash_error?(@doctor, :name) || ''
+                  .form-group.row
+                    .col-lg-12
+                      = f.label :hospital_id, 'Hospital'
+                      = f.select :hospital_id, @hospitals.map{|u| [ u.name , u.id]}, {prompt: "Select a category doctor"}, class: "form-control #{@doctor.errors[:hospital].any? ? 'error' : ''}"
+                      small.is-message.text-danger = flash_error?(@doctor, :hospital) || ''
+                  .form-group.row
+                    .col-lg-12.text-right
+                       = f.submit 'Add', class: "btn btn-primary"

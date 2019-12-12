@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_12_111356) do
+ActiveRecord::Schema.define(version: 2019_12_12_173537) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 2019_12_12_111356) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "booking_doctors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "customer_name"
+    t.integer "schedule_doctor_id"
+    t.index ["schedule_doctor_id"], name: "index_booking_doctors_on_schedule_doctor_id"
   end
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -38,6 +44,14 @@ ActiveRecord::Schema.define(version: 2019_12_12_111356) do
   create_table "hospitals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "address", limit: 16777215
+  end
+
+  create_table "schedule_doctors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "schedule"
+    t.integer "doctor_id"
+    t.time "start_time"
+    t.time "end_time"
+    t.index ["doctor_id"], name: "index_schedule_doctors_on_doctor_id"
   end
 
 end

@@ -1,0 +1,29 @@
+= render 'sehatq/backyard/shared/header'
+
+.ks-page-container.ks-dashboard-tabbed-sidebar-fixed-tabs
+  .ks-column.ks-page
+    .ks-page-header
+      section.ks-title-and-subtitle
+        .ks-title-block
+          .ks-sub-title Booking 
+          h3.ks-main-title Booking Doctor
+    .ks-page-content
+      .ks-page-content-body
+        .ks-nav-body-wrapper
+          .container-fluid
+            .row
+              .col-lg-4.offset-4
+                 = form_for @booking_doctor , as: :booking_doctor, url: sehatq_backyard_booking_doctor_index_path, method: :post do |f|
+                  .form-group.row
+                    .col-lg-12
+                      = f.label :customer_name, 'Patient Name'
+                      = f.text_field :customer_name, class: "form-control #{@booking_doctor.errors[:customer_name].any? ? 'error' : ''}"
+                      small.is-message.text-danger = flash_error?(@booking_doctor, :customer_name) || ''
+                  .form-group.row
+                    .col-lg-12
+                      = f.label :schedule_doctor_id, 'Choose schedule'
+                      = f.select :schedule_doctor_id, @schedule_doctors.map{|u| [ "#{u.doctor.name}  on #{u.schedule} (#{u.start_time.strftime('%T')} - #{u.end_time.strftime('%T')})" , u.id]}, {prompt: "Select schedule"}, class: "form-control #{@booking_doctor.errors[:schedule_doctor].any? ? 'error' : ''}"
+                      small.is-message.text-danger = flash_error?(@booking_doctor, :schedule_doctor) || ''
+                  .form-group.row
+                    .col-lg-12.text-right
+                       = f.submit 'Add', class: "btn btn-primary"

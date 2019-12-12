@@ -1,0 +1,51 @@
+= render 'sehatq/backyard/shared/header'
+
+.ks-page-container.ks-dashboard-tabbed-sidebar-fixed-tabs
+  .ks-column.ks-page
+    .ks-page-header
+      section.ks-title-and-subtitle
+        .ks-title-block
+          h3.ks-main-title Schedule Management
+    .ks-page-content
+      .ks-page-content-body.ks-filemanager-page
+        .ks-files
+          .ks-header
+            .ks-search.input-icon.icon-right.icon.icon-lg
+              = search_form_for ransack_instance, url: sehatq_backyard_schedule_doctor_index_path do |f|
+                = f.text_field :doctor_name_cont,
+                              placeholder: "Search",
+                              class: 'form-control', id: 'eg-search'
+                span.icon-addon
+                  span.la.la-search
+            .ks-filters
+              = button_to new_sehatq_backyard_schedule_doctor_path,
+                      class: 'btn-primary btn',
+                      method: :get do
+                | Add Schedule
+          .ks-content
+            table.table.table-bordered
+              thead
+                tr
+                  th width="150"  ID
+                  th Doctor Name
+                  th Schdule
+                  th Start time
+                  th End time
+              tbody
+                - @schedule_doctors.each do |schedule_doctor|
+                  tr
+                    td
+                      = schedule_doctor.id
+                    td
+                      = schedule_doctor.doctor.name
+                    td 
+                      = schedule_doctor.schedule.strftime('%d/%m/%Y')
+                    td 
+                      = schedule_doctor.start_time.strftime('%T')
+                    td 
+                      = schedule_doctor.end_time.strftime('%T')
+                - if @schedule_doctors.empty?
+                  td colspan="5" style="text-align: center;"
+                    | Schedule can't be found, Please click "Add Schedule" to get a new Schedule
+                
+            = paginate @schedule_doctors

@@ -1,0 +1,63 @@
+title
+  | MuscleLab
+nav.navbar.ks-navbar
+  /! BEGIN HEADER INNER
+  /! BEGIN LOGO
+  .navbar-brand href="#{root_path}" 
+    /! BEGIN RESPONSIVE SIDEBAR TOGGLER
+    a.ks-sidebar-toggle href="#" 
+      i.ks-icon.la.la-bars aria-hidden="true" 
+    a.ks-sidebar-mobile-toggle href="#" 
+      i.ks-icon.la.la-bars aria-hidden="true" 
+    /! END RESPONSIVE SIDEBAR TOGGLER
+    .ks-navbar-logo
+      a.ks-logo href="#{root_path}" 
+        | Hospital
+  /! END LOGO
+  /! BEGIN MENUS
+  .ks-wrapper
+    nav.nav.navbar-nav
+      /! BEGIN NAVBAR MENU
+      .ks-navbar-menu
+       
+      /! END NAVBAR MENU
+      /! BEGIN NAVBAR ACTIONS
+      .ks-navbar-actions
+        .nav-item.dropdown.ks-notifications
+          = link_to destroy_admin_session_path, method: :delete, class: "nav-link dropdown-toggle" do
+            span.la.la-sign-out.ks-icon aria-hidden="true" 
+      /! END NAVBAR ACTIONS
+    /! BEGIN NAVBAR ACTIONS TOGGLER
+    nav.nav.navbar-nav.ks-navbar-actions-toggle
+      a.nav-item.nav-link href="#" 
+        span.la.la-ellipsis-h.ks-icon.ks-open
+        span.la.la-close.ks-icon.ks-close
+    /! END NAVBAR ACTIONS TOGGLER
+    /! BEGIN NAVBAR MENU TOGGLER
+    nav.nav.navbar-nav.ks-navbar-menu-toggle
+      a.nav-item.nav-link href="#" 
+        span.la.la-th.ks-icon.ks-open
+        span.la.la-close.ks-icon.ks-close
+    /! END NAVBAR MENU TOGGLER
+    /! END MENUS
+    /! END HEADER INNER
+.ks-navbar-horizontal.ks-info
+  ul.nav.nav-pills
+    li.nav-item
+        a class="nav-link #{active_for(sehatq_backyard_admin_index_path)}" href=sehatq_backyard_admin_index_path 
+          span.ks-text Admin Management
+    li.nav-item
+        a class="nav-link #{active_for(sehatq_backyard_hospital_index_path)}" href=sehatq_backyard_hospital_index_path 
+          span.ks-text Hospital management
+    li.nav-item
+        a class="nav-link #{active_for(sehatq_backyard_doctor_index_path)}" href=sehatq_backyard_doctor_index_path 
+          span.ks-text Doctor management
+    li.nav-item
+        a class="nav-link #{active_for(sehatq_backyard_schedule_doctor_index_path)}" href=sehatq_backyard_schedule_doctor_index_path 
+          span.ks-text Schedule Doctor management
+    li.nav-item
+        a class="nav-link #{active_for(sehatq_backyard_booking_doctor_index_path)}" href=sehatq_backyard_booking_doctor_index_path 
+          span.ks-text Booking Doctor
+
+
+

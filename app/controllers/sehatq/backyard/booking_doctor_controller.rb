@@ -37,8 +37,8 @@ module Sehatq
         @schedule_doctors = ScheduleDoctor.select("schedule_doctors.*").joins(:booking_doctors)
                                           .group("schedule_doctors.id")
                                           .having("count(booking_doctors.id) < ?", 10)
-                                          .where("Date(schedule_doctors.schedule) >= ?  ", Time.zone.today)
-                                          .where("TIME(schedule_doctors.start_time) >= ? ", ctime.strftime('%H:%M'))
+                                          .where("Date(schedule_doctors.schedule) > ?  ", Time.zone.today)
+                                          .where.not("TIME(schedule_doctors.start_time) < ? AND Date(schedule_doctors.schedule) = ? ", ctime.strftime('%H:%M'), Time.zone.today)
       end
 
 
